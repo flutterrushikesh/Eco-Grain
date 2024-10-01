@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "281466804998",
+    "project_id": "eco-grain",
+    "storage_bucket": "eco-grain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281466804998:android:e6b4fe92d1fbae671a9c87",
+        "android_client_info": {
+          "package_name": "com.example.eco_grain"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdruEGiEQiEPhYbVTxvnbQYr8crZ5cIDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
