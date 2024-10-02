@@ -23,7 +23,7 @@ class LoginButton extends StatelessWidget {
         if (isUserNameValid && isPasswordValid) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("Sign Up success"),
+              content: Text("Login Success"),
             ),
           );
         }

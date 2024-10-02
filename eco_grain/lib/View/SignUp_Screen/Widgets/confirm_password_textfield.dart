@@ -12,6 +12,8 @@ class ConfirmPasswordTextfield extends StatelessWidget {
     return Form(
       key: Provider.of<SignupController>(context).confirmPasswordFormKey,
       child: TextFormField(
+        obscureText:
+            Provider.of<SignupController>(context).isShowConfirmedPassword,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
         decoration: InputDecoration(
@@ -25,9 +27,22 @@ class ConfirmPasswordTextfield extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          suffixIcon: const Icon(
-            Icons.visibility_off,
-            color: Color.fromRGBO(0, 0, 0, 0.5),
+          suffixIcon: GestureDetector(
+            onTap: Provider.of<SignupController>(context).showConfirmedPassword,
+            child:
+                Provider.of<SignupController>(context).isShowConfirmedPassword
+                    ? Consumer(
+                        builder: (context, provider, child) => const Icon(
+                          Icons.visibility_off,
+                          color: Color.fromRGBO(0, 0, 0, 0.5),
+                        ),
+                      )
+                    : Consumer(
+                        builder: (context, provider, child) => const Icon(
+                          Icons.visibility,
+                          color: Color.fromRGBO(0, 0, 0, 0.5),
+                        ),
+                      ),
           ),
         ),
         validator: (confirmPassword) =>

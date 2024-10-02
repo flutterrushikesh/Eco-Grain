@@ -19,6 +19,9 @@ class SignupController extends ChangeNotifier {
   final GlobalKey<FormState> passwordFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> confirmPasswordFormKey = GlobalKey<FormState>();
 
+  bool isShowNewPassword = true;
+  bool isShowConfirmedPassword = true;
+
   ///VALIDATION USERNAME WITH AS PER MY REQUIREMENT.
   String? validateUsername({required String username}) {
     if (username.isEmpty) {
@@ -74,5 +77,15 @@ class SignupController extends ChangeNotifier {
       return 'Passwords do not match';
     }
     return null;
+  }
+
+  void showNewPassword() {
+    isShowNewPassword = !isShowNewPassword;
+    notifyListeners();
+  }
+
+  void showConfirmedPassword() {
+    isShowConfirmedPassword = !isShowConfirmedPassword;
+    notifyListeners();
   }
 }

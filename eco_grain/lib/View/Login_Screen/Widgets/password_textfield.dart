@@ -13,7 +13,9 @@ class PasswordTextfield extends StatelessWidget {
       child: TextFormField(
         keyboardType: TextInputType.emailAddress,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
-            fontSize: screenWidth(context: context, responsive: 0.036)),
+              fontSize: screenWidth(context: context, responsive: 0.036),
+            ),
+        obscureText: Provider.of<LoginController>(context).isShowPassword,
         decoration: InputDecoration(
           // hintText: "Mobile Number",
           label: Text(
@@ -25,10 +27,25 @@ class PasswordTextfield extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          suffixIcon: const Icon(
-            Icons.visibility_off,
-            color: Color.fromRGBO(0, 0, 0, 0.5),
-          ),
+          suffixIcon: GestureDetector(
+              onTap: () {
+                Provider.of<LoginController>(context, listen: false)
+                    .showPassword();
+              },
+              child: Provider.of<LoginController>(context, listen: false)
+                      .isShowPassword
+                  ? Consumer(
+                      builder: (context, provider, child) => const Icon(
+                        Icons.visibility_off,
+                        color: Color.fromRGBO(0, 0, 0, 0.5),
+                      ),
+                    )
+                  : Consumer(
+                      builder: (context, provider, child) => const Icon(
+                        Icons.visibility,
+                        color: Color.fromRGBO(0, 0, 0, 0.5),
+                      ),
+                    )),
         ),
         validator: (loginPassword) =>
             Provider.of<LoginController>(context, listen: false)

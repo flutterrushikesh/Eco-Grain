@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class LoginController extends ChangeNotifier {
   final GlobalKey<FormState> loginUserKey = GlobalKey<FormState>();
   final GlobalKey<FormState> loginPasswordKey = GlobalKey<FormState>();
+
+  ///
+  bool isShowPassword = true;
 
   String? validateLoginUserName({required String loginUsername}) {
     if (loginUsername.isEmpty) {
@@ -16,5 +21,11 @@ class LoginController extends ChangeNotifier {
       return "Please enter password";
     }
     return null;
+  }
+
+  void showPassword() {
+    log("$isShowPassword");
+    isShowPassword = !isShowPassword;
+    notifyListeners();
   }
 }

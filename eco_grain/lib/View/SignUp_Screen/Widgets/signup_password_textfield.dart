@@ -12,6 +12,7 @@ class SignupPasswordTextfield extends StatelessWidget {
       key: Provider.of<SignupController>(context).passwordFormKey,
       child: TextFormField(
         controller: Provider.of<SignupController>(context).passwordController,
+        obscureText: Provider.of<SignupController>(context).isShowNewPassword,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
         decoration: InputDecoration(
@@ -24,9 +25,21 @@ class SignupPasswordTextfield extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          suffixIcon: const Icon(
-            Icons.visibility_off,
-            color: Color.fromRGBO(0, 0, 0, 0.5),
+          suffixIcon: GestureDetector(
+            onTap: Provider.of<SignupController>(context).showNewPassword,
+            child: Provider.of<SignupController>(context).isShowNewPassword
+                ? Consumer(
+                    builder: (context, provider, child) => const Icon(
+                      Icons.visibility_off,
+                      color: Color.fromRGBO(0, 0, 0, 0.5),
+                    ),
+                  )
+                : Consumer(
+                    builder: (context, provider, child) => const Icon(
+                      Icons.visibility,
+                      color: Color.fromRGBO(0, 0, 0, 0.5),
+                    ),
+                  ),
           ),
         ),
         validator: (password) =>
