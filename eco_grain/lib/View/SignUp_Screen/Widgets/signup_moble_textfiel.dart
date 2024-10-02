@@ -3,20 +3,22 @@ import 'package:grain_dispenser/Controller/Firebase_Auth/Signup_Controller/signu
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
 import 'package:provider/provider.dart';
 
-class UsernameTextfield extends StatelessWidget {
-  const UsernameTextfield({super.key});
+class SignupMobleTextfield extends StatelessWidget {
+  const SignupMobleTextfield({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: Provider.of<SignupController>(context).userNameFormKey,
+      key: Provider.of<SignupController>(context, listen: false)
+          .phoneNumberFormKey,
       child: TextFormField(
+        keyboardType: TextInputType.number,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
         decoration: InputDecoration(
           // hintText: "Mobile Number",
           label: Text(
-            "Username",
+            "Mobile Number",
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: const Color.fromRGBO(0, 0, 0, 0.5),
                 ),
@@ -25,9 +27,9 @@ class UsernameTextfield extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        validator: (username) =>
+        validator: (phoneNumber) =>
             Provider.of<SignupController>(context, listen: false)
-                .validateUsername(username: username!),
+                .validateMobileNumber(phoneNumber: phoneNumber!),
       ),
     );
   }
