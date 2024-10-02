@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:grain_dispenser/View/Home_Screen/home_screen.dart';
+import 'package:grain_dispenser/Controller/Firebase_Auth/Login_Controller/login_controller.dart';
+
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_width.dart';
+import 'package:provider/provider.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
@@ -9,9 +11,22 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ));
+        final LoginController loginController = Provider.of<LoginController>(
+          context,
+          listen: false,
+        );
+        bool isUserNameValid =
+            loginController.loginUserKey.currentState?.validate() ?? false;
+        bool isPasswordValid =
+            loginController.loginPasswordKey.currentState?.validate() ?? false;
+
+        if (isUserNameValid && isPasswordValid) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Sign Up success"),
+            ),
+          );
+        }
       },
       style: ButtonStyle(
         backgroundColor:

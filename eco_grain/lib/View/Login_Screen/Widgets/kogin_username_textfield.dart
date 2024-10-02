@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:grain_dispenser/Controller/Firebase_Auth/Login_Controller/login_controller.dart';
+
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
 import 'package:provider/provider.dart';
 
-class PasswordTextfield extends StatelessWidget {
-  const PasswordTextfield({super.key});
+class LoginUserTextfield extends StatelessWidget {
+  const LoginUserTextfield({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: Provider.of<LoginController>(context).loginPasswordKey,
+      key: Provider.of<LoginController>(context).loginUserKey,
       child: TextFormField(
         keyboardType: TextInputType.emailAddress,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
@@ -17,7 +18,7 @@ class PasswordTextfield extends StatelessWidget {
         decoration: InputDecoration(
           // hintText: "Mobile Number",
           label: Text(
-            "Password",
+            "Username",
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: const Color.fromRGBO(0, 0, 0, 0.5),
                 ),
@@ -25,14 +26,10 @@ class PasswordTextfield extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          suffixIcon: const Icon(
-            Icons.visibility_off,
-            color: Color.fromRGBO(0, 0, 0, 0.5),
-          ),
         ),
-        validator: (loginPassword) =>
+        validator: (loginUsername) =>
             Provider.of<LoginController>(context, listen: false)
-                .validateLoginPassword(loginPassword: loginPassword!),
+                .validateLoginUserName(loginUsername: loginUsername!),
       ),
     );
   }
