@@ -18,7 +18,7 @@ class SignupButton extends StatelessWidget {
         bool isUserNameValid =
             signupProvider.userNameFormKey.currentState?.validate() ?? false;
         bool isPhoneNumberValid =
-            signupProvider.phoneNumberFormKey.currentState?.validate() ?? false;
+            signupProvider.emailFomKey.currentState?.validate() ?? false;
         bool isPasswordValid =
             signupProvider.passwordFormKey.currentState?.validate() ?? false;
         bool isConfirmPasswordValid =
@@ -30,6 +30,10 @@ class SignupButton extends StatelessWidget {
             isPhoneNumberValid &&
             isPasswordValid &&
             isConfirmPasswordValid) {
+          signupProvider.createNewUser(
+            email: signupProvider.emailController.text,
+            password: signupProvider.confirmPasswordController.text,
+          );
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Sign Up success"),

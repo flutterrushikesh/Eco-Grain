@@ -12,6 +12,8 @@ class ConfirmPasswordTextfield extends StatelessWidget {
     return Form(
       key: Provider.of<SignupController>(context).confirmPasswordFormKey,
       child: TextFormField(
+        controller:
+            Provider.of<SignupController>(context).confirmPasswordController,
         obscureText:
             Provider.of<SignupController>(context).isShowConfirmedPassword,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(

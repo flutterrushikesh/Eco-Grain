@@ -1,21 +1,23 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grain_dispenser/View/Home_Screen/home_screen.dart';
 
 class SignupController extends ChangeNotifier {
-  final firebaseaAuth = FirebaseAuth.instance;
+  final FirebaseAuth firebaseaAuth = FirebaseAuth.instance;
 
   ///TEXTEDITING CONTROLLERS FOR STORES THE USER ENTERED INPUT.
   ///TO VALIDATE & PERFORM ANY OPERATION.
-  // final TextEditingController userNameController = TextEditingController();
-  // final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  // final TextEditingController confirmPasswordController =
-  //     TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   ///GLOBAL KEYS FOR VALIDATE TEXTFIELD.
   final GlobalKey<FormState> userNameFormKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> phoneNumberFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> emailFomKey = GlobalKey<FormState>();
   final GlobalKey<FormState> passwordFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> confirmPasswordFormKey = GlobalKey<FormState>();
 
@@ -44,14 +46,17 @@ class SignupController extends ChangeNotifier {
   }
 
   ///VALIDATION PHONENUMBER WITH AS PER MY REQUIREMENT.
-  String? validateMobileNumber({required String phoneNumber}) {
-    if (phoneNumber.isEmpty) {
-      return 'Mobile number is required';
-    } else if (phoneNumber.length != 10) {
-      return 'Mobile number must be 10 digits';
-    } else if (!RegExp(r'^[0-9]+$').hasMatch(phoneNumber)) {
-      return 'Mobile number should only contain digits';
+
+  String? validateEmail({required String email}) {
+    if (email.isEmpty) {
+      return 'Please enter an email';
     }
+    // Check if the email contains any spaces
+    if (email.contains(' ')) {
+      return 'Email should not contain spaces';
+    }
+
+    // You can optionally add other email validations if needed
     return null;
   }
 
@@ -73,7 +78,7 @@ class SignupController extends ChangeNotifier {
   String? validateConfirmPassword({required String confirmPassword}) {
     if (confirmPassword.isEmpty) {
       return 'Please confirm your password';
-    } else if (confirmPassword != passwordController) {
+    } else if (confirmPassword != passwordController.text) {
       return 'Passwords do not match';
     }
     return null;
@@ -87,5 +92,15 @@ class SignupController extends ChangeNotifier {
   void showConfirmedPassword() {
     isShowConfirmedPassword = !isShowConfirmedPassword;
     notifyListeners();
+  }
+
+  void createNewUser({required String email, required String password}) async {
+    // log(email);
+    // log(password);
+    UserCredential val = await firebaseaAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    log("${val.user}");
   }
 }

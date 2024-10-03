@@ -9,16 +9,16 @@ class SignupMobleTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: Provider.of<SignupController>(context, listen: false)
-          .phoneNumberFormKey,
+      key: Provider.of<SignupController>(context, listen: false).emailFomKey,
       child: TextFormField(
-        keyboardType: TextInputType.number,
+        controller: Provider.of<SignupController>(context).emailController,
+        keyboardType: TextInputType.emailAddress,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
         decoration: InputDecoration(
           // hintText: "Mobile Number",
           label: Text(
-            "Mobile Number",
+            "Email Address",
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: const Color.fromRGBO(0, 0, 0, 0.5),
                 ),
@@ -27,9 +27,9 @@ class SignupMobleTextfield extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        validator: (phoneNumber) =>
+        validator: (email) =>
             Provider.of<SignupController>(context, listen: false)
-                .validateMobileNumber(phoneNumber: phoneNumber!),
+                .validateEmail(email: email!),
       ),
     );
   }
