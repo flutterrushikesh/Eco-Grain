@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Login_Controller/login_controller.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Signup_Controller/signup_controller.dart';
+import 'package:grain_dispenser/Controller/Login_Screen_Controller/login_auth_controller.dart';
+import 'package:grain_dispenser/Controller/Signup_Screen_Controller.dart/signup_auth_controller.dart';
 import 'package:grain_dispenser/View/Splash_Screen/splash_screen.dart';
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +24,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => SignupController()),
-        ChangeNotifierProvider(create: (context) => LoginController()),
+        ChangeNotifierProvider(create: (context) => FirebaseSignupAuth()),
+        ChangeNotifierProvider(create: (context) => FirebaseLoginAuth()),
       ],
       child: MaterialApp(
         theme: ThemeData(
