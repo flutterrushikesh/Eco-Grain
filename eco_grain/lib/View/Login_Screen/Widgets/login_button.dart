@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Login_Controller/login_controller.dart';
+import 'package:grain_dispenser/Controller/Login_Screen_Controller/login_auth_controller.dart';
+
+import 'package:grain_dispenser/View/Home_Screen/home_screen.dart';
 
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_width.dart';
 import 'package:provider/provider.dart';
@@ -10,17 +12,27 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        final LoginController loginController = Provider.of<LoginController>(
+      onPressed: () async {
+        final FirebaseLoginAuth loginController =
+            Provider.of<FirebaseLoginAuth>(
           context,
           listen: false,
         );
+
         bool isUserNameValid =
             loginController.loginUserKey.currentState?.validate() ?? false;
         bool isPasswordValid =
             loginController.loginPasswordKey.currentState?.validate() ?? false;
 
         if (isUserNameValid && isPasswordValid) {
+          loginController.checkLoginSuccess(true);
+
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ),
+          );
+
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Login Success"),

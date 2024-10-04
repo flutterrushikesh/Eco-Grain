@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Login_Controller/login_controller.dart';
+import 'package:grain_dispenser/Controller/Login_Screen_Controller/login_auth_controller.dart';
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
 import 'package:provider/provider.dart';
 
@@ -9,15 +9,16 @@ class PasswordTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: Provider.of<LoginController>(context).loginPasswordKey,
+      key: Provider.of<FirebaseLoginAuth>(context).loginPasswordKey,
       child: TextFormField(
+        controller:
+            Provider.of<FirebaseLoginAuth>(context).loginPasswordController,
         keyboardType: TextInputType.emailAddress,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
               fontSize: screenWidth(context: context, responsive: 0.036),
             ),
-        obscureText: Provider.of<LoginController>(context).isShowPassword,
+        obscureText: Provider.of<FirebaseLoginAuth>(context).isShowPassword,
         decoration: InputDecoration(
-          // hintText: "Mobile Number",
           label: Text(
             "Password",
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
@@ -28,27 +29,28 @@ class PasswordTextfield extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           suffixIcon: GestureDetector(
-              onTap: () {
-                Provider.of<LoginController>(context, listen: false)
-                    .showPassword();
-              },
-              child: Provider.of<LoginController>(context, listen: false)
-                      .isShowPassword
-                  ? Consumer(
-                      builder: (context, provider, child) => const Icon(
-                        Icons.visibility_off,
-                        color: Color.fromRGBO(0, 0, 0, 0.5),
-                      ),
-                    )
-                  : Consumer(
-                      builder: (context, provider, child) => const Icon(
-                        Icons.visibility,
-                        color: Color.fromRGBO(0, 0, 0, 0.5),
-                      ),
-                    )),
+            onTap: () {
+              Provider.of<FirebaseLoginAuth>(context, listen: false)
+                  .showPassword();
+            },
+            child: Provider.of<FirebaseLoginAuth>(context, listen: false)
+                    .isShowPassword
+                ? Consumer(
+                    builder: (context, provider, child) => const Icon(
+                      Icons.visibility_off,
+                      color: Color.fromRGBO(0, 0, 0, 0.5),
+                    ),
+                  )
+                : Consumer(
+                    builder: (context, provider, child) => const Icon(
+                      Icons.visibility,
+                      color: Color.fromRGBO(0, 0, 0, 0.5),
+                    ),
+                  ),
+          ),
         ),
         validator: (loginPassword) =>
-            Provider.of<LoginController>(context, listen: false)
+            Provider.of<FirebaseLoginAuth>(context, listen: false)
                 .validateLoginPassword(loginPassword: loginPassword!),
       ),
     );

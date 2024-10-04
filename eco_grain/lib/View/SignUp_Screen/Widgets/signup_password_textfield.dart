@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Signup_Controller/signup_controller.dart';
+import 'package:grain_dispenser/Controller/Signup_Screen_Controller.dart/signup_auth_controller.dart';
 import 'package:grain_dispenser/View/ui_helper/responsive_screen_height.dart';
 import 'package:provider/provider.dart';
 
@@ -9,10 +9,10 @@ class SignupPasswordTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: Provider.of<SignupController>(context).passwordFormKey,
+      key: Provider.of<FirebaseSignupAuth>(context).passwordFormKey,
       child: TextFormField(
-        controller: Provider.of<SignupController>(context).passwordController,
-        obscureText: Provider.of<SignupController>(context).isShowNewPassword,
+        controller: Provider.of<FirebaseSignupAuth>(context).passwordController,
+        obscureText: Provider.of<FirebaseSignupAuth>(context).isShowNewPassword,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
         decoration: InputDecoration(
@@ -26,8 +26,8 @@ class SignupPasswordTextfield extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           suffixIcon: GestureDetector(
-            onTap: Provider.of<SignupController>(context).showNewPassword,
-            child: Provider.of<SignupController>(context).isShowNewPassword
+            onTap: Provider.of<FirebaseSignupAuth>(context).showNewPassword,
+            child: Provider.of<FirebaseSignupAuth>(context).isShowNewPassword
                 ? Consumer(
                     builder: (context, provider, child) => const Icon(
                       Icons.visibility_off,
@@ -43,7 +43,7 @@ class SignupPasswordTextfield extends StatelessWidget {
           ),
         ),
         validator: (password) =>
-            Provider.of<SignupController>(context, listen: false)
+            Provider.of<FirebaseSignupAuth>(context, listen: false)
                 .validatePassword(password: password!),
       ),
     );

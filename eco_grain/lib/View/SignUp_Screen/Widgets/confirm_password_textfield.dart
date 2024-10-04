@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Signup_Controller/signup_controller.dart';
+import 'package:grain_dispenser/Controller/Signup_Screen_Controller.dart/signup_auth_controller.dart';
 
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
 import 'package:provider/provider.dart';
@@ -10,12 +10,12 @@ class ConfirmPasswordTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: Provider.of<SignupController>(context).confirmPasswordFormKey,
+      key: Provider.of<FirebaseSignupAuth>(context).confirmPasswordFormKey,
       child: TextFormField(
         controller:
-            Provider.of<SignupController>(context).confirmPasswordController,
+            Provider.of<FirebaseSignupAuth>(context).confirmPasswordController,
         obscureText:
-            Provider.of<SignupController>(context).isShowConfirmedPassword,
+            Provider.of<FirebaseSignupAuth>(context).isShowConfirmedPassword,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
         decoration: InputDecoration(
@@ -30,9 +30,10 @@ class ConfirmPasswordTextfield extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           suffixIcon: GestureDetector(
-            onTap: Provider.of<SignupController>(context).showConfirmedPassword,
+            onTap:
+                Provider.of<FirebaseSignupAuth>(context).showConfirmedPassword,
             child:
-                Provider.of<SignupController>(context).isShowConfirmedPassword
+                Provider.of<FirebaseSignupAuth>(context).isShowConfirmedPassword
                     ? Consumer(
                         builder: (context, provider, child) => const Icon(
                           Icons.visibility_off,
@@ -48,7 +49,7 @@ class ConfirmPasswordTextfield extends StatelessWidget {
           ),
         ),
         validator: (confirmPassword) =>
-            Provider.of<SignupController>(context, listen: false)
+            Provider.of<FirebaseSignupAuth>(context, listen: false)
                 .validateConfirmPassword(confirmPassword: confirmPassword!),
       ),
     );

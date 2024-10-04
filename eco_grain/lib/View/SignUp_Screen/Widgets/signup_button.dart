@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Signup_Controller/signup_controller.dart';
+
+import 'package:grain_dispenser/Controller/Signup_Screen_Controller.dart/signup_auth_controller.dart';
+
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_width.dart';
 import 'package:provider/provider.dart';
 
-class SignupButton extends StatelessWidget {
+class SignupButton extends StatefulWidget {
   const SignupButton({super.key});
 
   @override
+  State<SignupButton> createState() => _SignupButtonState();
+}
+
+class _SignupButtonState extends State<SignupButton> {
+  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
         // Accessing the Signup provider once and storing it in a variable
-        final signupProvider =
-            Provider.of<SignupController>(context, listen: false);
+        final FirebaseSignupAuth signupProvider =
+            Provider.of<FirebaseSignupAuth>(context, listen: false);
 
         // Validate all fields at once
         bool isUserNameValid =
@@ -30,14 +37,10 @@ class SignupButton extends StatelessWidget {
             isPhoneNumberValid &&
             isPasswordValid &&
             isConfirmPasswordValid) {
-          signupProvider.createNewUser(
+          signupProvider.signup(
             email: signupProvider.emailController.text,
             password: signupProvider.confirmPasswordController.text,
-          );
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Sign Up success"),
-            ),
+            context: context,
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(

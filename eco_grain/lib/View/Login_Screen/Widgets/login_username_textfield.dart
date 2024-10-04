@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Login_Controller/login_controller.dart';
+import 'package:grain_dispenser/Controller/Login_Screen_Controller/login_auth_controller.dart';
 
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
 import 'package:provider/provider.dart';
@@ -10,15 +10,16 @@ class LoginUserTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: Provider.of<LoginController>(context).loginUserKey,
+      key: Provider.of<FirebaseLoginAuth>(context).loginUserKey,
       child: TextFormField(
+        controller: Provider.of<FirebaseLoginAuth>(context).emailController,
         keyboardType: TextInputType.emailAddress,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
         decoration: InputDecoration(
           // hintText: "Mobile Number",
           label: Text(
-            "Username",
+            "Email",
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: const Color.fromRGBO(0, 0, 0, 0.5),
                 ),
@@ -28,7 +29,7 @@ class LoginUserTextfield extends StatelessWidget {
           ),
         ),
         validator: (loginUsername) =>
-            Provider.of<LoginController>(context, listen: false)
+            Provider.of<FirebaseLoginAuth>(context, listen: false)
                 .validateLoginUserName(loginUsername: loginUsername!),
       ),
     );

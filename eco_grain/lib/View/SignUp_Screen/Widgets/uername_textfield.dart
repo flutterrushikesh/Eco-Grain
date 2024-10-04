@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grain_dispenser/Controller/Firebase_Auth/Signup_Controller/signup_controller.dart';
+import 'package:grain_dispenser/Controller/Signup_Screen_Controller.dart/signup_auth_controller.dart';
 import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +9,7 @@ class UsernameTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: Provider.of<SignupController>(context).userNameFormKey,
+      key: Provider.of<FirebaseSignupAuth>(context).userNameFormKey,
       child: TextFormField(
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
@@ -26,7 +26,7 @@ class UsernameTextfield extends StatelessWidget {
           ),
         ),
         validator: (username) =>
-            Provider.of<SignupController>(context, listen: false)
+            Provider.of<FirebaseSignupAuth>(context, listen: false)
                 .validateUsername(username: username!),
       ),
     );

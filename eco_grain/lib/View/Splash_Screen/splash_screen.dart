@@ -9,11 +9,13 @@ class SplashScreen extends StatelessWidget {
       const Duration(
         seconds: 5,
       ),
-      () => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
-        ),
-      ),
+      () => WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ),
+        );
+      }),
     );
     return Scaffold(
       body: Container(
