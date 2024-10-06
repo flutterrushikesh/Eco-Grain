@@ -91,7 +91,6 @@ class FirebaseSignupAuth extends ChangeNotifier {
     required String password,
     required BuildContext context,
   }) async {
-    log("IN SIGNUP");
     try {
       // Create a new user using Firebase Authentication
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -110,11 +109,14 @@ class FirebaseSignupAuth extends ChangeNotifier {
       notifyListeners();
     } on FirebaseAuthException catch (e) {
       String message = '';
+      log(e.code);
       // Handle different Firebase authentication error cases
       if (e.code == 'weak-password') {
         message = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
         message = 'An account already exists with this email.';
+      } else if (e.code == 'invalid-email') {
+        message = 'Please enter correct email.';
       } else {
         message = 'An unknown error occurred. Please try again.';
       }

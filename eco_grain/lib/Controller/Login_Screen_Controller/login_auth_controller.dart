@@ -1,10 +1,11 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:grain_dispenser/View/Home_Screen/home_screen.dart';
 
 class FirebaseLoginAuth extends ChangeNotifier {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   bool loginSucess = false;
 
   ///
@@ -59,6 +60,7 @@ class FirebaseLoginAuth extends ChangeNotifier {
         );
       });
     } on FirebaseAuthException catch (e) {
+      log(e.code);
       String message = '';
       if (e.code == 'invalid-email') {
         message = 'No user found for that email.';
@@ -74,8 +76,14 @@ class FirebaseLoginAuth extends ChangeNotifier {
         fontSize: 14.0,
       );
     } catch (e) {
-      String exception = "$e";
-      exception.hashCode;
+      Fluttertoast.showToast(
+        msg: "$e",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.SNACKBAR,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
     } finally {
       loginSucess = false;
       notifyListeners();
