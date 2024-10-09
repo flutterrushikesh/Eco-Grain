@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grain_dispenser/Controller/Signup_Screen_Controller.dart/signup_auth_controller.dart';
 
-import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
+import 'package:grain_dispenser/View/ui_helper/responsive_screen_width.dart';
 import 'package:provider/provider.dart';
 
 class ConfirmPasswordTextfield extends StatelessWidget {

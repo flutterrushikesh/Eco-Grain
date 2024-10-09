@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:grain_dispenser/Controller/Signup_Screen_Controller.dart/signup_auth_controller.dart';
+import 'package:grain_dispenser/View/ui_helper/responsive_screen_height.dart';
 
-import 'package:grain_dispenser/View/UI_Helper/responsive_screen_width.dart';
 import 'package:provider/provider.dart';
 
 class SignupButton extends StatefulWidget {
@@ -37,6 +39,9 @@ class _SignupButtonState extends State<SignupButton> {
             isPhoneNumberValid &&
             isPasswordValid &&
             isConfirmPasswordValid) {
+          log("${signupProvider.signUpSucess}");
+          signupProvider.signUpSucess = true;
+          log("${signupProvider.signUpSucess}");
           signupProvider.signup(
             email: signupProvider.emailController.text,
             password: signupProvider.confirmPasswordController.text,

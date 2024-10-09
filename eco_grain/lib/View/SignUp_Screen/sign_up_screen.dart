@@ -8,7 +8,8 @@ import 'package:grain_dispenser/View/SignUp_Screen/Widgets/signup_moble_textfiel
 import 'package:grain_dispenser/View/SignUp_Screen/Widgets/signup_password_textfield.dart';
 import 'package:grain_dispenser/View/SignUp_Screen/Widgets/uername_textfield.dart';
 import 'package:grain_dispenser/View/UI_Helper/Widgets/screen_padding.dart';
-import 'package:grain_dispenser/View/UI_Helper/responsive_screen_width.dart';
+import 'package:grain_dispenser/View/ui_helper/responsive_screen_height.dart';
+
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {

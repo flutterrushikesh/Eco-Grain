@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grain_dispenser/View/SignUp_Screen/sign_up_screen.dart';
-import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
+
+import 'package:grain_dispenser/View/ui_helper/responsive_screen_width.dart';
 
 class SignupRow extends StatelessWidget {
   const SignupRow({super.key});

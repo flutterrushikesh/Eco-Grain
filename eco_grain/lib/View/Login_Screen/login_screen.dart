@@ -7,7 +7,8 @@ import 'package:grain_dispenser/View/Login_Screen/Widgets/login_username_textfie
 import 'package:grain_dispenser/View/Login_Screen/Widgets/password_textfield.dart';
 import 'package:grain_dispenser/View/Login_Screen/Widgets/signup_row.dart';
 import 'package:grain_dispenser/View/UI_Helper/Widgets/screen_padding.dart';
-import 'package:grain_dispenser/View/UI_Helper/responsive_screen_width.dart';
+import 'package:grain_dispenser/View/ui_helper/responsive_screen_height.dart';
+
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -36,7 +37,6 @@ class LoginScreen extends StatelessWidget {
                   Padding(
                     padding: ScreenPadding.screenPadding(context: context),
                     child: Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const LoginHeading(),
                         SizedBox(

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:grain_dispenser/View/Home_Screen/home_screen.dart';
+import 'package:grain_dispenser/View/Bottom_Navigation.dart/bottom_navigation.dart';
 
 class FirebaseLoginAuth extends ChangeNotifier {
   bool loginSucess = false;
@@ -38,11 +38,6 @@ class FirebaseLoginAuth extends ChangeNotifier {
     notifyListeners();
   }
 
-  void checkLoginSuccess(bool loginSucess) {
-    this.loginSucess = loginSucess;
-    notifyListeners();
-  }
-
   Future<void> logIn(
       {required String email,
       required String password,
@@ -51,11 +46,10 @@ class FirebaseLoginAuth extends ChangeNotifier {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      await Future.delayed(const Duration(seconds: 1));
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const BottomNavbar(),
           ),
         );
       });
@@ -86,6 +80,7 @@ class FirebaseLoginAuth extends ChangeNotifier {
       );
     } finally {
       loginSucess = false;
+
       notifyListeners();
     }
   }

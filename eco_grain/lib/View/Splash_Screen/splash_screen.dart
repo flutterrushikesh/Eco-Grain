@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:grain_dispenser/View/Bottom_Navigation.dart/bottom_navigation.dart';
+
 import 'package:grain_dispenser/View/Login_Screen/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -11,7 +15,14 @@ class SplashScreen extends StatelessWidget {
       ),
       () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return const BottomNavbar();
+                }
+                return const LoginScreen();
+              }),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grain_dispenser/Controller/Login_Screen_Controller/login_auth_controller.dart';
+import 'package:grain_dispenser/View/ui_helper/responsive_screen_height.dart';
 
-import 'package:grain_dispenser/View/UI_Helper/responsive_screen_width.dart';
 import 'package:provider/provider.dart';
 
 class LoginButton extends StatelessWidget {
@@ -23,15 +23,11 @@ class LoginButton extends StatelessWidget {
             loginController.loginPasswordKey.currentState?.validate() ?? false;
 
         if (isUserNameValid && isPasswordValid) {
+          loginController.loginSucess = true;
           loginController.logIn(
             email: loginController.emailController.text,
             password: loginController.loginPasswordController.text,
             context: context,
-          );
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Login Success"),
-            ),
           );
         }
       },

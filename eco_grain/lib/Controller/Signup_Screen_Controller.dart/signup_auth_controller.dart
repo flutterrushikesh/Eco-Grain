@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:grain_dispenser/View/Home_Screen/home_screen.dart';
+import 'package:grain_dispenser/View/Bottom_Navigation.dart/bottom_navigation.dart';
 
 class FirebaseSignupAuth extends ChangeNotifier {
   bool signUpSucess = false;
@@ -102,7 +102,7 @@ class FirebaseSignupAuth extends ChangeNotifier {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const BottomNavbar(),
           ),
         );
       });

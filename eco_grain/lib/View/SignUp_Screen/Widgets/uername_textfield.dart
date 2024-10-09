@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grain_dispenser/Controller/Signup_Screen_Controller.dart/signup_auth_controller.dart';
-import 'package:grain_dispenser/View/UI_Helper/responsive_screen_height.dart';
+
+import 'package:grain_dispenser/View/ui_helper/responsive_screen_width.dart';
 import 'package:provider/provider.dart';
 
 class UsernameTextfield extends StatelessWidget {
@@ -11,6 +12,7 @@ class UsernameTextfield extends StatelessWidget {
     return Form(
       key: Provider.of<FirebaseSignupAuth>(context).userNameFormKey,
       child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
         style: Theme.of(context).textTheme.bodySmall!.copyWith(
             fontSize: screenWidth(context: context, responsive: 0.036)),
         decoration: InputDecoration(
